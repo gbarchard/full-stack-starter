@@ -1,0 +1,10 @@
+@import "tailwindcss";
+@import "flowbite-react/plugin/tailwindcss";
+@source "../.flowbite-react/class-list.json";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* tailwind isn't doing this out of the box, but should be */
+button {
+  cursor: pointer;
+}
