@@ -8,3 +8,12 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+  backend:
+    container_name: backend
+    ports:
+      - "3000:3000"
+    build:
+      context: ./backend
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
