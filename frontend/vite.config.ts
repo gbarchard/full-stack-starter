@@ -12,4 +12,8 @@ export default defineConfig({
     flowbiteReact(),
     checker({ typescript: { tsconfigPath: "./tsconfig.app.json" } }),
   ],
+  server: {
+    host: "0.0.0.0",
+    port: 5173,
+  },
 })
