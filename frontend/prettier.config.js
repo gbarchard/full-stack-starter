@@ -5,4 +5,4 @@ export default {
   // tailwindcss
   tailwindAttributes: ["theme"],
   tailwindFunctions: ["twMerge", "createTheme"],
-};
+}
