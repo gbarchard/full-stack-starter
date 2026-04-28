@@ -1,15 +1,14 @@
-import { Button } from "flowbite-react"
-import { useCallback, useEffect } from "react"
+import { BrowserRouter, Route, Routes } from "react-router"
+import Login from "./pages/Login"
+import Home from "./pages/Home"
 
 export default function App() {
-  const request = useCallback(async () => {
-    const res = await fetch("http://localhost:3000")
-    const text = await res.text()
-    console.log(text)
-  }, [])
-  useEffect(() => {
-    request()
-  }, [request])
-
-  return <Button color="default">Yo</Button>
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route index element={<Login />} />
+        <Route path="home" element={<Home />} />
+      </Routes>
+    </BrowserRouter>
+  )
 }
