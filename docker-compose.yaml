@@ -19,13 +19,14 @@ services:
       - /app/node_modules
   mongodb:
     image: mongo:latest
-    command: mongod --quiet
     container_name: mongodb
     ports:
       - 27017:27017
     volumes:
       - mongodb_data:/data/db
     restart: unless-stopped
+    # suppress logs becuase they're too noisy
+    command: --quiet --logpath /dev/null
 
 volumes:
   mongodb_data:
