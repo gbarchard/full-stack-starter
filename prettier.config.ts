@@ -1,8 +1,10 @@
-/** @type {import('prettier').Config} */
-export default {
+import { type Config } from "prettier"
+
+const config = {
   plugins: ["prettier-plugin-tailwindcss"],
   semi: false,
-  // tailwindcss
   tailwindAttributes: ["theme"],
   tailwindFunctions: ["twMerge", "createTheme"],
-}
+} satisfies Config
+
+export default config
