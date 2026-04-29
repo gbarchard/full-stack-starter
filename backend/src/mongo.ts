@@ -8,12 +8,10 @@ const dbName = "full_stack_starter"
 let mongodb: Db
 
 async function main() {
-  console.log("conntecting...")
   await client.connect()
-  console.log("Connected successfully to server")
   mongodb = client.db(dbName)
 
-  return "done."
+  return "Conneced to mongo"
 }
 
 const connectDb = () => main().then(console.log).catch(console.error)
