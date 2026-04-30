@@ -1,8 +1,8 @@
-import express from 'express'
 import cors from 'cors'
-import { connectDb } from './mongo.ts'
-import { auth } from './firebase.ts'
+import express from 'express'
 import { getContext, setContext } from './context.ts'
+import { auth } from './firebase.ts'
+import { connectDb } from './mongo.ts'
 
 const app = express()
 const port = 3000

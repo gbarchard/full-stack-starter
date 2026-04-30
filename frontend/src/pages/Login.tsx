@@ -1,8 +1,8 @@
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Button } from 'flowbite-react'
 import { useCallback } from 'react'
-import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router'
+import { auth } from '../utils/firebase'
 
 export default function Login() {
   const navigate = useNavigate()

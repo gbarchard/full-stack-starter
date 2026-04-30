@@ -16,4 +16,4 @@ async function main() {
 
 const connectDb = () => main().then(console.log).catch(console.error)
 
-export { mongodb, connectDb }
+export { connectDb, mongodb }

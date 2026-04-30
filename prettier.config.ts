@@ -1,7 +1,7 @@
 import { type Config } from 'prettier'
 
 const config = {
-  plugins: ['prettier-plugin-tailwindcss'],
+  plugins: ['prettier-plugin-tailwindcss', 'prettier-plugin-organize-imports'],
   semi: false,
   singleQuote: true,
   tailwindAttributes: ['theme'],
