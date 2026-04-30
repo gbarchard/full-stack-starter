@@ -1,20 +1,25 @@
 import { Button } from 'flowbite-react'
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router'
+import { auth } from '../utils/firebase'
 
 export default function Home() {
   const navigate = useNavigate()
 
   const logout = useCallback(async () => {
-    await fetch('http://localhost:3000/api/logout', {
-      method: 'POST',
-      credentials: 'same-origin',
-    })
+    await auth.signOut()
     navigate('/')
   }, [navigate])
 
-  const getUser = useCallback(() => {
-    fetch('http://localhost:3000/api/user', { credentials: 'include' })
+  const getUser = useCallback(async () => {
+    const token = await auth.currentUser?.getIdToken()
+    if (!token) return
+    fetch('http://localhost:3000/user', {
+      credentials: 'include',
+      headers: {
+        authorization: token,
+      },
+    })
   }, [])
 
   return (

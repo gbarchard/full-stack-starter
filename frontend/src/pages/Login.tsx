@@ -1,21 +1,24 @@
 import { Button } from 'flowbite-react'
 import { useCallback } from 'react'
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
+import { auth } from '../utils/firebase'
 import { useNavigate } from 'react-router'
 
 export default function Login() {
   const navigate = useNavigate()
 
-  // shouldn't work because not logged in
-  const getUser = useCallback(() => {
-    fetch('http://localhost:3000/api/user', { credentials: 'include' })
-  }, [])
+  const onGoogleLogin = useCallback(async () => {
+    const googleProvider = new GoogleAuthProvider()
+    await signInWithPopup(auth, googleProvider)
+    navigate('/home')
+  }, [navigate])
 
   return (
-    <>
-      <Button onClick={() => navigate('http://localhost:3000/api/auth/google')}>
+    <section className="mx-auto my-auto w-full max-w-sm space-y-4 rounded-4xl bg-gray-300 p-4 dark:bg-gray-800">
+      <h1 className="text-center text-xl">Full Stack Starter</h1>
+      <Button onClick={onGoogleLogin} pill className="w-full">
         Log In
       </Button>
-      <Button onClick={getUser}>Click me</Button>
-    </>
+    </section>
   )
 }
