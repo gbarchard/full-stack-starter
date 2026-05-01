@@ -3,15 +3,23 @@ import express from 'express'
 import { getContext, setContext } from './context.ts'
 import { auth } from './firebase.ts'
 import { connectDb } from './mongo.ts'
+import { server } from './apollo.ts'
+import { expressMiddleware } from '@as-integrations/express5'
 
 const app = express()
+
+await server.start()
+
 const port = 3000
 
 app.use(
+  '/graphql',
   cors({
     origin: 'http://localhost:5173',
     credentials: true,
   }),
+  express.json(),
+  expressMiddleware(server),
 )
 
 app.use(async function (req, res, next) {
