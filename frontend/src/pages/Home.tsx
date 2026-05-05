@@ -11,21 +11,9 @@ export default function Home() {
     navigate('/')
   }, [navigate])
 
-  const getUser = useCallback(async () => {
-    const token = await auth.currentUser?.getIdToken()
-    if (!token) return
-    fetch('http://localhost:3000/user', {
-      credentials: 'include',
-      headers: {
-        authorization: token,
-      },
-    })
-  }, [])
-
   return (
     <>
       <Button onClick={logout}>Log Out</Button>
-      <Button onClick={getUser}>Get the user</Button>
     </>
   )
 }

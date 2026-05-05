@@ -1,53 +1,38 @@
+import { expressMiddleware } from '@as-integrations/express5'
 import cors from 'cors'
 import express from 'express'
-import { getContext, setContext } from './context.ts'
+import { server } from './apollo.ts'
 import { auth } from './firebase.ts'
 import { connectDb } from './mongo.ts'
-import { server } from './apollo.ts'
-import { expressMiddleware } from '@as-integrations/express5'
 
-const app = express()
+async function startServer() {
+  const app = express()
 
-await server.start()
+  await server.start()
 
-const port = 3000
+  const port = 3000
 
-app.use(
-  '/graphql',
-  cors({
-    origin: 'http://localhost:5173',
-    credentials: true,
-  }),
-  express.json(),
-  expressMiddleware(server),
-)
+  app.use(
+    '/graphql',
+    cors({
+      origin: 'http://localhost:5173',
+      credentials: true,
+    }),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req, res }) => {
+        const token = req.headers['authorization']
+        if (!token) return res.status(401).send()
+        const decodedToken = await auth.verifyIdToken(token)
+        return { decodedToken, userId: decodedToken.uid }
+      },
+    }),
+  )
 
-app.use(async function (req, res, next) {
-  const token = req.headers['authorization']
-  if (!token) return res.status(401).send()
+  app.listen(port, () => {
+    console.log(`listening on port ${port}`)
+    connectDb()
+  })
+}
 
-  try {
-    const decodedToken = await auth.verifyIdToken(token)
-    setContext(req, { decodedToken, userId: decodedToken?.uid })
-  } catch (e) {
-    console.error(e)
-    return res.status(401).send()
-  }
-
-  next()
-})
-
-app.get('/', async (req, res) => {
-  const context = getContext(req)
-  return res.send(context?.userId)
-})
-
-app.get('/user', async (req, res) => {
-  const context = getContext(req)
-  return res.send(context).status(200)
-})
-
-app.listen(port, () => {
-  console.log(`listening on port ${port}`)
-  connectDb()
-})
+startServer()

@@ -6,12 +6,14 @@
   "description": "node server",
   "author": "Grant Barchard",
   "scripts": {
-    "start": "nodemon ./src/server.ts"
+    "start": "nodemon ./src/server.ts",
+    "gen:dev": "npx graphql-codegen --watch \"**/*.graphql\""
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^7.0.0",
     "@graphql-codegen/typescript": "^6.0.0",
     "@graphql-codegen/typescript-resolvers": "^6.0.0",
+    "@parcel/watcher": "^2.5.6",
     "@types/node": "^25.0.3",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
@@ -20,6 +22,8 @@
   "dependencies": {
     "@apollo/server": "^5.5.0",
     "@as-integrations/express5": "^1.1.2",
+    "@graphql-tools/load-files": "^7.0.1",
+    "@graphql-tools/merge": "^9.1.9",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.6",
     "cors": "^2.8.5",

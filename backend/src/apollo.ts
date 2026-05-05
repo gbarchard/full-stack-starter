@@ -1,21 +1,16 @@
 import { ApolloServer } from '@apollo/server'
+import { loadFilesSync } from '@graphql-tools/load-files'
+import { mergeTypeDefs } from '@graphql-tools/merge'
+import path from 'path'
+import { usersResolvers } from '../src/resolvers/users/users.resolve.ts'
 
-const typeDefs = `#graphql
-  # Comments in GraphQL strings (such as this one) start with the hash (#) symbol.
-  # This "Book" type defines the queryable fields for every book in our data source.
-  type Book {
-    title: String
-    author: String
-  }
-  # The "Query" type is special: it lists all of the available queries that
-  # clients can execute, along with the return type for each. In this
-  # case, the "books" query returns an array of zero or more Books (defined above).
-  type Query {
-    books: [Book]
-  }
-`
+const typesArray = loadFilesSync(
+  path.join(import.meta.dirname, './resolvers/**/*.graphql'),
+)
+
+const typeDefs = mergeTypeDefs(typesArray)
 
 export const server = new ApolloServer({
   typeDefs,
-  resolvers: { Query: { books: () => [{ title: 'hello', author: 'world' }] } },
+  resolvers: usersResolvers,
 })

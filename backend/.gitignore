@@ -2,3 +2,4 @@ node_modules
 .env
 
 firebase-creds.json
+src/generated
