@@ -5,7 +5,7 @@ const config: CodegenConfig = {
   documents: ['src/**/*.gql'],
   generates: {
     // Use a path that works the best for the structure of your application
-    './src/types.ts': {
+    './src/types.generated.ts': {
       plugins: ['typescript'],
       config: {
         // Apollo Client always includes `__typename` fields
@@ -19,7 +19,7 @@ const config: CodegenConfig = {
       preset: 'near-operation-file',
       presetConfig: {
         extension: '.generated.tsx',
-        baseTypesPath: 'types.ts',
+        baseTypesPath: 'types.generated.ts',
       },
       plugins: [
         'typescript',
