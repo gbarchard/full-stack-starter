@@ -8,6 +8,16 @@ services:
     volumes:
       - ./frontend:/app
       - /app/node_modules
+  codegen-frontend:
+    container_name: codegen-frontend
+    restart: on-failure
+    build:
+      context: './frontend'
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+      - ./backend/src:/backend/src
+    command: 'npm run gen:dev'
   backend:
     container_name: backend
     ports:

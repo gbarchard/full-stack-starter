@@ -15,4 +15,7 @@ export default defineConfig([
     rules: reactHooks.configs.recommended.rules,
   },
   reactRefresh.configs.recommended,
+  {
+    ignores: ['**/*.generated.tsx'],
+  },
 ])

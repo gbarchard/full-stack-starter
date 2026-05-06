@@ -7,16 +7,25 @@
     "dev": "vite --host 0.0.0.0",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "gen:dev": "npx graphql-codegen --watch \"**/*.graphql\""
   },
   "dependencies": {
+    "@apollo/client": "^3.13.5",
     "firebase": "^12.12.1",
     "flowbite-react": "^0.12.4",
+    "graphql": "^16.13.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-router": "^7.11.0"
+    "react-router": "^7.11.0",
+    "rxjs": "^7.8.2"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^7.0.0",
+    "@graphql-codegen/near-operation-file-preset": "^5.2.0",
+    "@graphql-codegen/typescript-operations": "^6.0.0",
+    "@graphql-codegen/typescript-react-apollo": "^4.4.2",
+    "@parcel/watcher": "^2.5.6",
     "@tailwindcss/vite": "^4.1.11",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
