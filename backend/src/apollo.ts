@@ -2,7 +2,7 @@ import { ApolloServer } from '@apollo/server'
 import { loadFilesSync } from '@graphql-tools/load-files'
 import { mergeTypeDefs } from '@graphql-tools/merge'
 import path from 'path'
-import { usersResolvers } from '../src/resolvers/users/users.resolve.ts'
+import { usersResolvers } from '../src/resolvers/users/users.resolve'
 
 const typesArray = loadFilesSync(
   path.join(import.meta.dirname, './resolvers/**/*.graphql'),

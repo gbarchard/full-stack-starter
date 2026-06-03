@@ -6,7 +6,7 @@
   "description": "node server",
   "author": "Grant Barchard",
   "scripts": {
-    "start": "nodemon ./src/server.ts",
+    "start": "nodemon --exec tsx ./src/server.ts",
     "gen:dev": "npx graphql-codegen --watch \"**/*.graphql\""
   },
   "devDependencies": {
@@ -17,6 +17,7 @@
     "@types/node": "^25.0.3",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
+    "tsx": "^4.22.3",
     "typescript": "~5.8.3"
   },
   "dependencies": {
