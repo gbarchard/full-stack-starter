@@ -1,6 +1,7 @@
-query User {
+query NavBar {
   user {
     id
     name
+    photoURL
   }
 }
