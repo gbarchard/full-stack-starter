@@ -4,5 +4,7 @@ type Query {
 
 type User {
   id: String!
-  name: String!
+  firebaseUid: String!
+  name: String
+  photoURL: String
 }

@@ -1,6 +1,6 @@
-import { type DecodedIdToken } from 'firebase-admin/auth'
+import { ObjectId } from 'mongodb'
 
 export interface Context {
-  decodedToken: DecodedIdToken
-  userId: string
+  userId: ObjectId
+  firebaseUid: string
 }
