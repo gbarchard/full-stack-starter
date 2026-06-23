@@ -1,7 +1,7 @@
 import { type Resolvers } from '../../generated/graphql'
 import { getUser } from './users.repo'
 
-export const usersResolvers: Resolvers = {
+export default {
   Query: {
     user: async (_, __, context) => {
       const user = await getUser(context.userId)
@@ -13,4 +13,4 @@ export const usersResolvers: Resolvers = {
       }
     },
   },
-}
+} satisfies Resolvers

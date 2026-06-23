@@ -7,11 +7,12 @@ import { type Context } from './context'
 import { auth } from './firebase'
 import { connectDb } from './mongo'
 import { createUser, getUserByFirebaseUid } from './resolvers/users/users.repo'
-import { logger, server } from './utils'
+import { getServer, logger } from './utils'
 
 async function startServer() {
   const app = express()
 
+  const server = await getServer()
   await server.start()
 
   const port = 3000
