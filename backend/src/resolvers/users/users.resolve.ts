@@ -9,6 +9,7 @@ export const usersResolvers: Resolvers = {
         id: context.userId.toString(),
         name: user?.displayName,
         firebaseUid: context.firebaseUid,
+        photoURL: user?.photoURL,
       }
     },
   },

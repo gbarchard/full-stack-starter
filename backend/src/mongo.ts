@@ -1,4 +1,5 @@
 import { Db, MongoClient } from 'mongodb'
+import { logger } from './utils'
 
 const url = 'mongodb://host.docker.internal:27017'
 const client = new MongoClient(url)
@@ -14,6 +15,6 @@ async function main() {
   return 'Conneced to mongo'
 }
 
-const connectDb = () => main().then(console.log).catch(console.error)
+const connectDb = () => main().then(logger.info).catch(logger.error)
 
 export { connectDb, mongodb }

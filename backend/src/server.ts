@@ -1,11 +1,13 @@
+import { ApolloServerErrorCode } from '@apollo/server/errors'
 import { expressMiddleware } from '@as-integrations/express5'
 import cors from 'cors'
 import express from 'express'
-import { server } from './apollo'
+import { GraphQLError } from 'graphql/error'
 import { type Context } from './context'
 import { auth } from './firebase'
 import { connectDb } from './mongo'
 import { createUser, getUserByFirebaseUid } from './resolvers/users/users.repo'
+import { logger, server } from './utils'
 
 async function startServer() {
   const app = express()
@@ -22,13 +24,29 @@ async function startServer() {
     }),
     express.json(),
     expressMiddleware(server, {
-      context: async ({ req, res }) => {
+      context: async ({ req }): Promise<Context> => {
         const token = req.headers['authorization']
-        if (!token) return res.status(401).send('Missing Token')
+        if (!token) {
+          throw new GraphQLError('Token not found', {
+            extensions: {
+              code: ApolloServerErrorCode.BAD_REQUEST,
+              http: { status: 401 },
+            },
+          })
+        }
+
         const decodedToken = await auth.verifyIdToken(token)
         const firebaseUid = decodedToken.uid
         const user = await getUserByFirebaseUid(firebaseUid)
-        if (!user) return res.status(401).send('User Not Found')
+        if (!user) {
+          throw new GraphQLError('User not found', {
+            extensions: {
+              code: ApolloServerErrorCode.INTERNAL_SERVER_ERROR,
+              http: { status: 500 },
+            },
+          })
+        }
+
         return {
           userId: user._id,
           firebaseUid,
@@ -71,7 +89,7 @@ async function startServer() {
   )
 
   app.listen(port, () => {
-    console.log(`listening on port ${port}`)
+    logger.info(`listening on port ${port}`)
     connectDb()
   })
 }
