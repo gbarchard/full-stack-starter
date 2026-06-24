@@ -7,4 +7,5 @@ type User {
   firebaseUid: String!
   name: String
   photoURL: String
+  createdDate: Date!
 }

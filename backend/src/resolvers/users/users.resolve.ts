@@ -10,6 +10,7 @@ export default {
         name: user?.displayName,
         firebaseUid: context.firebaseUid,
         photoURL: user?.photoURL,
+        createdDate: context.userId.getTimestamp(),
       }
     },
   },
