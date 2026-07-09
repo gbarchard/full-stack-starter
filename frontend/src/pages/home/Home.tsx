@@ -36,7 +36,7 @@ export default function Home() {
       <header className="flex justify-end mx-4 mt-4">
         <Button onClick={() => setShowAddItemModal(true)}>Add Item</Button>
       </header>
-      <section className="grid grid-cols-1 gap-2 m-4 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <section className="m-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
         {data?.items.map((item) => (
           <ItemCard key={item._id} item={item} />
         ))}
