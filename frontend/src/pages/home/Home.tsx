@@ -8,8 +8,9 @@ import {
   ModalHeader,
   Spinner,
   TextInput,
+  theme,
 } from 'flowbite-react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import {
   HomePageDocument,
   HomePageQuery,
@@ -58,6 +59,21 @@ function AddItemModal(props: { show: boolean; onClose: () => void }) {
     onClose()
   }, [addItem, onClose, text])
 
+  const keyEvent = useCallback(
+    (e: KeyboardEvent) => {
+      if (e.key === 'Enter') {
+        onSubmit()
+      }
+    },
+    [onSubmit],
+  )
+
+  useEffect(() => {
+    window.addEventListener('keydown', keyEvent)
+
+    return () => window.removeEventListener('keydown', keyEvent)
+  })
+
   return (
     <Modal show={show} onClose={onClose} dismissible>
       <ModalHeader>Add Item</ModalHeader>
@@ -88,7 +104,10 @@ function ItemCard(props: { item: HomePageQuery['items'][number] }) {
 
   return (
     <>
-      <Card href="#" onClick={() => setShowAddItemModal(true)}>
+      <Card
+        className={theme.card.root.href + ' cursor-pointer'}
+        onClick={() => setShowAddItemModal(true)}
+      >
         {item.title}
       </Card>
       <DeleteItemConfirmationModal
