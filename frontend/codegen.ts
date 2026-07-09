@@ -1,4 +1,16 @@
 import { CodegenConfig } from '@graphql-codegen/cli'
+
+const scalars: Record<string, { input: string; output: string }> = {
+  Date: {
+    input: 'string',
+    output: 'string',
+  },
+  ObjectId: {
+    input: 'string',
+    output: 'string',
+  },
+}
+
 const config: CodegenConfig = {
   overwrite: true,
   schema: '../backend/src/**/*.graphql',
@@ -13,6 +25,7 @@ const config: CodegenConfig = {
         // Apollo Client doesn't add the `__typename` field to root types so
         // don't generate a type for the `__typename` for root operation types.
         skipTypeNameForRoot: true,
+        scalars,
       },
     },
     'src/': {
@@ -21,11 +34,10 @@ const config: CodegenConfig = {
         extension: '.generated.tsx',
         baseTypesPath: 'types.generated.ts',
       },
-      plugins: [
-        'typescript',
-        'typescript-operations',
-        'typescript-react-apollo',
-      ],
+      plugins: ['typescript-operations', 'typescript-react-apollo'],
+      config: {
+        scalars,
+      },
     },
   },
 }

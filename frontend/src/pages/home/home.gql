@@ -1,0 +1,14 @@
+query HomePage {
+  items {
+    _id
+    title
+  }
+}
+
+mutation AddItem($addItemInput: AddItemInput!) {
+  addItem(addItemInput: $addItemInput)
+}
+
+mutation DeleteItem($itemId: ObjectId!) {
+  deleteItem(itemId: $itemId)
+}

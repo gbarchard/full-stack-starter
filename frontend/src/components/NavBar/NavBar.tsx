@@ -34,9 +34,10 @@ export default function NavBar() {
         />
       </Link>
       <NavbarCollapse>
-        <Link to="home">
-          <NavbarLink>Home</NavbarLink>
-        </Link>
+        {/* @ts-expect-error to is a valid prop */}
+        <NavbarLink as={Link} to="home">
+          Home
+        </NavbarLink>
       </NavbarCollapse>
     </_NavBar>
   )

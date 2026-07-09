@@ -9,6 +9,17 @@ const config: CodegenConfig = {
         useIndexSignature: true,
         useTypeImports: true,
         contextType: '../context#Context',
+        defaultMapper: 'Partial<{T}>',
+        scalars: {
+          Date: {
+            input: 'Date',
+            output: 'Date',
+          },
+          ObjectId: {
+            input: "import('mongodb').ObjectId",
+            output: "import('mongodb').ObjectId",
+          },
+        },
       },
     },
   },

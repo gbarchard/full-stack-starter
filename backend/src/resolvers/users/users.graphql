@@ -3,7 +3,7 @@ type Query {
 }
 
 type User {
-  id: String!
+  id: ObjectId!
   firebaseUid: String!
   name: String
   photoURL: String

@@ -1,0 +1,19 @@
+type Query {
+  items: [Item!]!
+}
+
+type Mutation {
+  addItem(addItemInput: AddItemInput!): ObjectId!
+  deleteItem(itemId: ObjectId!): Boolean!
+}
+
+type Item {
+  _id: ObjectId!
+  userId: ObjectId!
+  title: String!
+  createdDate: Date!
+}
+
+input AddItemInput {
+  title: String!
+}

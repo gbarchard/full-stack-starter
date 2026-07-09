@@ -6,7 +6,7 @@ export default {
     user: async (_, __, context) => {
       const user = await getUser(context.userId)
       return {
-        id: context.userId.toString(),
+        id: context.userId,
         name: user?.displayName,
         firebaseUid: context.firebaseUid,
         photoURL: user?.photoURL,
