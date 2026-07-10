@@ -4,7 +4,8 @@
   "scripts": {
     "start": "docker compose up",
     "lint": "eslint",
-    "format": "prettier . --write"
+    "format": "prettier . --write",
+    "build": "bash build.sh"
   },
   "type": "module",
   "devDependencies": {

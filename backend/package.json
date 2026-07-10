@@ -7,6 +7,8 @@
   "author": "Grant Barchard",
   "scripts": {
     "start": "nodemon --exec tsx ./src/server.ts",
+    "build": "npm run gen && tsc -b",
+    "gen": "npx graphql-codegen **/*.graphql",
     "gen:dev": "npx graphql-codegen --watch \"**/*.graphql\""
   },
   "devDependencies": {
