@@ -21,6 +21,12 @@ export default defineConfig([
   },
   reactRefresh.configs.recommended,
   {
-    ignores: ['**/*.generated.tsx', '**/*.generated.ts', '**/graphql.ts'],
+    ignores: [
+      '**/*.generated.tsx',
+      '**/*.generated.ts',
+      '**/graphql.ts',
+      '**/node_modules/**',
+      '**/dist/**',
+    ],
   },
 ])
