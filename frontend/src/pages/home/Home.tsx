@@ -33,7 +33,7 @@ export default function Home() {
         show={showAddItemModal}
         onClose={() => setShowAddItemModal(false)}
       />
-      <header className="flex justify-end mx-4 mt-4">
+      <header className="mx-4 mt-4 flex justify-end">
         <Button onClick={() => setShowAddItemModal(true)}>Add Item</Button>
       </header>
       <section className="m-4 grid grid-cols-1 gap-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

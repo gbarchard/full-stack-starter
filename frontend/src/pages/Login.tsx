@@ -8,8 +8,8 @@ export default function Login() {
   useExistingSession()
   const onGoogleLogin = useGoogleLogin()
   return (
-    <section className="w-full max-w-sm p-4 mx-auto my-auto bg-gray-300 space-y-4 rounded-4xl dark:bg-gray-800">
-      <h1 className="text-xl text-center">Full Stack Starter</h1>
+    <section className="mx-auto my-auto w-full max-w-sm space-y-4 rounded-4xl bg-gray-300 p-4 dark:bg-gray-800">
+      <h1 className="text-center text-xl">Full Stack Starter</h1>
       <Button onClick={onGoogleLogin} pill className="w-full">
         Log In
       </Button>
