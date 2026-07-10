@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.13.5",
+    "classnames": "^2.5.1",
     "firebase": "^12.12.1",
     "flowbite-react": "^0.12.4",
     "graphql": "^16.13.2",

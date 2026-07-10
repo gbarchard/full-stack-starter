@@ -1,3 +1,4 @@
+import classNames from 'classnames'
 import {
   Button,
   Card,
@@ -105,7 +106,7 @@ function ItemCard(props: { item: HomePageQuery['items'][number] }) {
   return (
     <>
       <Card
-        className={theme.card.root.href + ' cursor-pointer'}
+        className={classNames(theme.card.root.href, 'cursor-pointer')}
         onClick={() => setShowAddItemModal(true)}
       >
         {item.title}
