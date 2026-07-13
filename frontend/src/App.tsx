@@ -1,6 +1,7 @@
 import { Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router'
+import { ErrorBoundary } from './components/ErrorBoundary'
 import NavBar from './components/NavBar/NavBar'
 import Home from './pages/home/Home'
 import Login from './pages/Login'
@@ -10,15 +11,17 @@ import { auth } from './utils/firebase'
 
 export default function App() {
   return (
-    <BrowserRouter>
-      <Routes>
-        <Route index element={<Login />} />
-        <Route element={<AuthenticatedApp />}>
-          <Route path="home" element={<Home />} />
-          <Route path="profile" element={<Profile />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <ErrorBoundary>
+      <BrowserRouter>
+        <Routes>
+          <Route index element={<Login />} />
+          <Route element={<AuthenticatedApp />}>
+            <Route path="home" element={<Home />} />
+            <Route path="profile" element={<Profile />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </ErrorBoundary>
   )
 }
 
