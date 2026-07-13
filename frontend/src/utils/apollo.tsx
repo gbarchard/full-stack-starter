@@ -6,11 +6,12 @@ import {
 } from '@apollo/client'
 import { ApolloProvider } from '@apollo/client/react'
 import { PropsWithChildren } from 'react'
+import { env } from '../env'
 
 export function Apollo(props: PropsWithChildren<{ token: string }>) {
   const { token, children } = props
 
-  const httpLink = new HttpLink({ uri: 'http://localhost:3000/graphql' })
+  const httpLink = new HttpLink({ uri: `${env.SERVER_URL}/graphql` })
 
   const authMiddleware = new ApolloLink((operation, forward) => {
     operation.setContext(({ headers = {} }) => ({

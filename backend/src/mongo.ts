@@ -1,8 +1,8 @@
 import { Db, MongoClient } from 'mongodb'
+import { env } from './env'
 import { logger } from './utils'
 
-const url = 'mongodb://host.docker.internal:27017'
-const client = new MongoClient(url)
+const client = new MongoClient(env.MONGO_URL)
 
 const dbName = 'full_stack_starter'
 

@@ -2,6 +2,7 @@ import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { Button } from 'flowbite-react'
 import { useCallback, useEffect } from 'react'
 import { useNavigate } from 'react-router'
+import { env } from '../env'
 import { auth } from '../utils/firebase'
 
 export default function Login() {
@@ -50,7 +51,7 @@ function useGoogleLogin() {
 
 async function createUserIfNecessary(token: string) {
   const createUserResponse = await fetch(
-    'http://localhost:3000/create-user-if-necessary',
+    `${env.SERVER_URL}/create-user-if-necessary`,
     {
       method: 'POST',
       headers: { authorization: token },

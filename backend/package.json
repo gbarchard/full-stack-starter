@@ -6,7 +6,7 @@
   "description": "node server",
   "author": "Grant Barchard",
   "scripts": {
-    "start": "nodemon --exec tsx ./src/server.ts",
+    "start": "nodemon --env-file=.env --exec tsx ./src/server.ts",
     "build": "npm run gen && tsc -b",
     "gen": "npx graphql-codegen **/*.graphql",
     "gen:dev": "npx graphql-codegen --watch \"**/*.graphql\""
@@ -33,6 +33,7 @@
     "express": "^5.2.1",
     "firebase-admin": "^13.8.0",
     "graphql": "^16.13.2",
-    "mongodb": "^7.2.0"
+    "mongodb": "^7.2.0",
+    "zod": "^4.4.3"
   }
 }

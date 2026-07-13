@@ -4,6 +4,7 @@ import cors from 'cors'
 import express from 'express'
 import { GraphQLError } from 'graphql/error'
 import { type Context } from './context'
+import { env } from './env'
 import { auth } from './firebase'
 import { connectDb } from './mongo'
 import { createUser, getUserByFirebaseUid } from './resolvers/users/users.repo'
@@ -20,7 +21,7 @@ async function startServer() {
   app.use(
     '/graphql',
     cors({
-      origin: 'http://localhost:5173',
+      origin: env.CLIENT_URL,
       credentials: true,
     }),
     express.json(),
@@ -56,7 +57,7 @@ async function startServer() {
     }),
   )
 
-  app.use(cors({ origin: 'http://localhost:5173', credentials: true }))
+  app.use(cors({ origin: env.CLIENT_URL, credentials: true }))
 
   app.post(
     '/create-user-if-necessary',

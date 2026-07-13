@@ -27,3 +27,5 @@ dist-ssr
 firebase-creds.json
 src/**/*.generated.ts
 src/**/*.generated.tsx
+
+.env
