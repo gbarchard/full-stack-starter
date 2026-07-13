@@ -12,6 +12,7 @@ import {
   theme,
 } from 'flowbite-react'
 import { useCallback, useEffect, useState } from 'react'
+import { LoadableContentWrapper } from '../../components/LoadableContentWrapper'
 import {
   HomePageDocument,
   HomePageQuery,
@@ -24,12 +25,8 @@ export default function Home() {
   const { loading, data, error } = useHomePageQuery()
   const [showAddItemModal, setShowAddItemModal] = useState(false)
 
-  if (loading) return <Spinner />
-
-  if (error) return <div>Failed to load items</div>
-
   return (
-    <>
+    <LoadableContentWrapper loading={loading} errorMessage={error?.message}>
       <AddItemModal
         show={showAddItemModal}
         onClose={() => setShowAddItemModal(false)}
@@ -42,7 +39,7 @@ export default function Home() {
           <ItemCard key={item._id} item={item} />
         ))}
       </section>
-    </>
+    </LoadableContentWrapper>
   )
 }
 
