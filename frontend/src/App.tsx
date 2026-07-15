@@ -1,5 +1,6 @@
 import { Spinner } from 'flowbite-react'
 import { useEffect, useState } from 'react'
+import { Toaster } from 'react-hot-toast'
 import { BrowserRouter, Navigate, Outlet, Route, Routes } from 'react-router'
 import { ErrorBoundary } from './components/ErrorBoundary'
 import NavBar from './components/NavBar/NavBar'
@@ -12,6 +13,7 @@ import { auth } from './utils/firebase'
 export default function App() {
   return (
     <ErrorBoundary>
+      <Toaster position="bottom-right" />
       <BrowserRouter>
         <Routes>
           <Route index element={<Login />} />

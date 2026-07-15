@@ -13,6 +13,7 @@ import {
 } from 'flowbite-react'
 import { useCallback, useEffect, useState } from 'react'
 import { LoadableContentWrapper } from '../../components/LoadableContentWrapper'
+import { sendErrorToast, sendSuccessToast } from '../../utils/toast'
 import {
   HomePageDocument,
   HomePageQuery,
@@ -129,7 +130,9 @@ function DeleteItemConfirmationModal(props: {
     await deleteItemMutation({
       variables: { itemId },
       refetchQueries: [HomePageDocument],
-    })
+    }).catch(() => sendErrorToast('Failed to delete item'))
+
+    sendSuccessToast('Item Deleted')
     onClose()
   }, [deleteItemMutation, itemId, onClose])
 
