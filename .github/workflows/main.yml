@@ -1,8 +1,8 @@
-name: "Main"
+name: 'Main'
 
 on:
   push:
-    branches: ["main"]
+    branches: ['main']
 
 jobs:
   build:
@@ -17,9 +17,9 @@ jobs:
         with:
           node-version: 25
           cache: 'npm'
-      
+
       - name: Install Dependencies
-        run: npm install && cd frontend && npm install && cd backend && npm install
+        run: npm install && (cd frontend && npm install) && (cd backend && npm install)
 
       - name: Build
         run: npm run build
