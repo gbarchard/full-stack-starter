@@ -64,29 +64,36 @@ async function startServer() {
 
     express.json(),
     async (req, res) => {
-      const token = req.headers['authorization']
+      try {
+        const token = req.headers['authorization']
 
-      if (!token) {
-        return res.status(401).send('Missing Token')
-      }
+        if (!token) {
+          return res.status(401).send('Missing Token')
+        }
 
-      const decodedToken = await auth.verifyIdToken(token)
-      const firebaseUid = decodedToken.uid
-      const existingUser = await getUserByFirebaseUid(firebaseUid)
+        const decodedToken = await auth.verifyIdToken(token)
+        const firebaseUid = decodedToken.uid
+        const existingUser = await getUserByFirebaseUid(firebaseUid)
 
-      if (existingUser) {
+        if (existingUser) {
+          return res.status(200).send()
+        }
+
+        const firebaseUser = await auth.getUser(firebaseUid)
+
+        await createUser({
+          firebaseUid,
+          displayName: firebaseUser.displayName,
+          email: firebaseUser.email,
+          photoURL: firebaseUser.photoURL,
+        })
         return res.status(200).send()
+      } catch (e) {
+        if (e instanceof Error) {
+          return res.status(500).send(e.message)
+        }
+        return res.status(500).send('An Unkown Error Occuerred')
       }
-
-      const firebaseUser = await auth.getUser(firebaseUid)
-
-      await createUser({
-        firebaseUid,
-        displayName: firebaseUser.displayName,
-        email: firebaseUser.email,
-        photoURL: firebaseUser.photoURL,
-      })
-      return res.status(200).send()
     },
   )
 

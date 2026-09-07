@@ -30,7 +30,14 @@ export default function NavBar() {
         <Avatar
           rounded
           placeholderInitials={initials}
-          img={data?.user?.photoURL ?? undefined}
+          img={(props) => (
+            <img
+              {...props}
+              src={data?.user?.photoURL ?? undefined}
+              alt={data?.user?.name ?? undefined}
+              referrerPolicy="no-referrer"
+            />
+          )}
         />
       </Link>
       <NavbarCollapse>
