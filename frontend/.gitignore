@@ -24,7 +24,6 @@ dist-ssr
 *.sln
 *.sw?
 
-firebase-creds.json
 src/**/*.generated.ts
 src/**/*.generated.tsx
 

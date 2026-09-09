@@ -1,7 +1,9 @@
 import { cert, initializeApp, type ServiceAccount } from 'firebase-admin/app'
 import { getAuth } from 'firebase-admin/auth'
-import firebaseCreds from '../firebase-creds.json' with { type: 'json' }
+import { env } from './env'
 import { logger } from './utils'
+
+const firebaseCreds = JSON.parse(env.FIREBASE_CREDS)
 
 if (!firebaseCreds) {
   throw new Error('Firebase credentials not found')

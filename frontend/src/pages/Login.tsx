@@ -79,7 +79,7 @@ function useGoogleLogin() {
 
 async function createUserIfNecessary(token: string) {
   const createUserResponse = await fetch(
-    `${env.SERVER_URL}/create-user-if-necessary`,
+    `${env.VITE_SERVER_URL}/create-user-if-necessary`,
     {
       method: 'POST',
       headers: { authorization: token },
